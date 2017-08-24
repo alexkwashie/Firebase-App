@@ -32,15 +32,15 @@
      // Save message
      saveMessage(name, company, email, phone, message);
 
-     // Show alert
+     // Show alert: This will display the message sent message which display= none in Css.
      document.querySelector('.alert').style.display = 'block';
 
-     // Hide alert after 3 seconds
+     // Hide alert after 3 seconds: And it goes disappears after 3 seconds
      setTimeout(function() {
          document.querySelector('.alert').style.display = 'none';
      }, 3000);
 
-     // Clear form
+     // Clear form: this clears the from back to normal, it is important they follow these steps
      document.getElementById('contactForm').reset();
  }
 
