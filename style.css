@@ -88,6 +88,11 @@ ul {
     border-radius: 5px;
 }
 
+.contact form textarea {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 15px;
+}
+
 .contact form button {
     background: #c9e6ff;
     border-radius: 5px;
@@ -100,7 +105,8 @@ ul {
     background: #485e74;
     color: white;
     outline: 0;
-    transition: background-color 1s ease-in;
+    transition: background-color 0.3s ease-in;
+    box-shadow: 0 0 20px 0 rgba(2, 64, 116, 0.7);
 }
 
 
