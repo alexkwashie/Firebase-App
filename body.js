@@ -1,61 +1,59 @@
- // Initialize Firebase
- var config = {
-     apiKey: "AIzaSyCAL1W9mIzABACVwQo2L6-Yz0hx5BuFwfc",
-     authDomain: "contact-form-e51fd.firebaseapp.com",
-     databaseURL: "https://contact-form-e51fd.firebaseio.com",
-     projectId: "contact-form-e51fd",
-     storageBucket: "contact-form-e51fd.appspot.com",
-     messagingSenderId: "932951222808"
- };
- firebase.initializeApp(config);
+// Initialize Firebase
+var config = {
+    apiKey: "AIzaSyCAL1W9mIzABACVwQo2L6-Yz0hx5BuFwfc",
+    authDomain: "contact-form-e51fd.firebaseapp.com",
+    databaseURL: "https://contact-form-e51fd.firebaseio.com",
+    projectId: "contact-form-e51fd",
+    storageBucket: "contact-form-e51fd.appspot.com",
+    messagingSenderId: "932951222808"
+};
+firebase.initializeApp(config);
 
+// Reference messages collection
+var messagesRef = firebase.database().ref('messages');
 
+// Listen for form submit
+document.getElementById('contactForm').addEventListener('submit', submitForm);
 
- // Reference messages collection
- var messagesRef = firebase.database().ref('messages');
+// Submit form
+function submitForm(e) {
+    e.preventDefault();
 
- // Listen for form submit
- document.getElementById('contactForm').addEventListener('submit', submitForm);
+    // Get values
+    var name = getInputVal('name');
+    var company = getInputVal('company');
+    var email = getInputVal('email');
+    var phone = getInputVal('phone');
+    var message = getInputVal('message');
 
- // Submit form
- function submitForm(e) {
-     e.preventDefault();
+    // Save message
+    saveMessage(name, company, email, phone, message);
 
-     // Get values
-     var name = getInputVal('name');
-     var company = getInputVal('company');
-     var email = getInputVal('email');
-     var phone = getInputVal('phone');
-     var message = getInputVal('message');
+    // Show alert
+    document.querySelector('.alert').style.display = 'block';
 
-     // Save message
-     saveMessage(name, company, email, phone, message);
+    // Hide alert after 3 seconds
+    setTimeout(function() {
+        document.querySelector('.alert').style.display = 'none';
+    }, 3000);
 
-     // Show alert
-     document.querySelector('.alert').style.display = 'block';
+    // Clear form
+    document.getElementById('contactForm').reset();
+}
 
-     // Hide alert after 3 seconds
-     setTimeout(function() {
-         document.querySelector('.alert').style.display = 'none';
-     }, 3000);
+// Function to get get form values
+function getInputVal(id) {
+    return document.getElementById(id).value;
+}
 
-     // Clear form
-     document.getElementById('contactForm').reset();
- }
-
- // Function to get get form values
- function getInputVal(id) {
-     return document.getElementById(id).value;
- }
-
- // Save message to firebase
- function saveMessage(name, company, email, phone, message) {
-     var newMessageRef = messagesRef.push();
-     newMessageRef.set({
-         name: name,
-         company: company,
-         email: email,
-         phone: phone,
-         message: message
-     });
- }
+// Save message to firebase
+function saveMessage(name, company, email, phone, message) {
+    var newMessageRef = messagesRef.push();
+    newMessageRef.set({
+        name: name,
+        company: company,
+        email: email,
+        phone: phone,
+        message: message
+    });
+}
